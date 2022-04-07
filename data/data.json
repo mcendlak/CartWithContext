@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "name": "Bread",
+      "price": 4.99,
+      "id": "c7fa1f6f-3666-41a9-8146-516cb0ccb2d0",
+      "quantity": 3
+    },
+    {
+      "name": "Apple",
+      "price": 2.99,
+      "id": "5ce09ecf-01ba-4177-95ab-dddb64f987e3",
+      "quantity": 10
+    },
+    {
+      "name": "Banana",
+      "price": 3.49,
+      "id": "a6425e95-e546-4c9f-95f3-1f2b9edbc642",
+      "quantity": 5
+    },
+    {
+      "name": "Carrot",
+      "price": 1.49,
+      "id": "9b5911d6-6917-41ca-9316-eaef1cec053b",
+      "quantity": 8
+    },
+    {
+      "name": "Potato",
+      "price": 5.49,
+      "id": "dd606b50-b938-4f92-ba59-9ccd6201a85b",
+      "quantity": 2
+    },
+    {
+      "name": "Bean",
+      "price": 2.49,
+      "id": "5c727bb9-f3a2-42c4-a714-a017ee1993e4",
+      "quantity": 6
+    }
+  ]
+}
