@@ -1,10 +1,8 @@
-import React from "react";
-
 // styles
 import "./Cart.css";
 // components
 import ListOfAvailableProducts from "./ListOfAvailableProducts";
-import ChosenProducts from "./ChosenProducts";
+import ChosenProducts from "./ListOfChosenProducts";
 
 const Cart = () => {
   return (

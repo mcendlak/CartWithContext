@@ -1,36 +1,30 @@
 import { useReducer } from "react";
-import { IContext, IItemData, Istate } from "../../types";
+import { IItemData } from "../../types";
 
-type ACTIONTYPES =
-  | { type: "addProduct" }
-  | { type: "removeProduct" }
-  | { type: "removeAllProducts" }
-  | { type: "submitCart" };
+import { cartReducer } from "./reducer";
 
-const reducer = (
-  state: Istate,
-  action: ACTIONTYPES
-) => {
-  switch (action.type) {
-    case "addProduct":
-      return state;
-    case "removeAllProducts":
-      return state;
-    case "removeProduct":
-      return state;
-    case "submitCart":
-      return state;
-    default:
-      throw new Error("Action type not recognized");
-  }
-};
+const initialState: { items: IItemData[] } = { items: [] };
 
-const useCartReducer = (cartContext: React.Context<IContext>) => {
-  const [state, dispatch] = useReducer(reducer, cartContext);
-  const addProduct = () => {};
-  const removeProduct = () => {};
-  const removeAllProducts = () => {};
-  const submitCart = () => {};
+const useCartReducer = () => {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  const addProduct = (product: IItemData) => {
+    console.log(state)
+    dispatch({ type: "addProduct", payload: product });
+  };
+
+  const removeProduct = (productId: string) => {
+    dispatch({type: 'removeProduct', payload: productId})
+  };
+
+  const removeAllProducts = () => {
+    dispatch({type: 'removeAllProducts'})
+  };
+
+  const submitCart = () => {
+    dispatch({type: 'submitCart'})
+  };
+
   return { addProduct, removeProduct, removeAllProducts, submitCart, state };
 };
 

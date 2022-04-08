@@ -1,11 +1,10 @@
-import React from 'react';
 import { useFetch } from "../hooks/useFetch";
 
 // styles
 import './ListOfAvailableProducts.css'
 
 // components
-import AvailableItem from './AvailableItem';
+import AvailableProduct from './AvailableProduct';
 
 const ListOfAvailableProducts = () => {
   const URL = 'http://localhost:3000/items'
@@ -17,7 +16,7 @@ const ListOfAvailableProducts = () => {
       {error ? <p>{error}</p> : null}
       {isPending ? <p>Loading</p> : null}
       {items ? <>{items.map((item) => (
-        <AvailableItem item={item}/>
+        <AvailableProduct item={item} key={item.id}/>
       ))}</> : null}
     </div>
   );

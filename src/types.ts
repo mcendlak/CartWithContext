@@ -5,14 +5,16 @@ interface IItemData {
   quantity: number;
 }
 
-interface Istate {items: IItemData[]}
+interface Istate {
+  items: IItemData[];
+}
 
 interface IContext {
-  addProduct: () => void;
-    removeProduct: () => void;
-    removeAllProducts: () => void;
-    submitCart: () => void;
-    state: Istate;
+  addProduct: (product: IItemData) => void
+  removeProduct: (productId: string) => void
+  removeAllProducts: () => void;
+  submitCart: () => void;
+  state: Istate;
 }
 
 export type { IItemData, Istate, IContext };

@@ -5,18 +5,14 @@ import "./App.css";
 import Cart from "./components/Cart";
 
 // context
-import {CartContextProvider} from "./context/CartContext";
-
+import { CartContextProvider } from "./context/CartContext";
 
 function App() {
   return (
     <div className="App">
       <CartContextProvider>
-      <Cart />
-
+        <Cart />
       </CartContextProvider>
-      
-      
     </div>
   );
 }
