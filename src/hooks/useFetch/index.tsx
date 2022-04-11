@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { IItemData } from "../../types";
+import { IItemData } from "../../context/types";
+
+// TODO - create a ShopResource class
+// ShopResource
+// getItems
 
 export const useFetch = (url: string) => {
   const [data, setData] = useState<IItemData[]>([]);
@@ -11,18 +15,19 @@ export const useFetch = (url: string) => {
       setIsPending(true);
 
       try {
+        // const items = await ShopResource.getItems();
         const res = await fetch(url);
         if (!res.ok) {
           throw new Error(res.statusText);
         }
         const data = await res.json();
 
-        setIsPending(false);
         setData(data);
         setError("");
       } catch (err) {
-        setIsPending(false);
         setError("Could not fetch the data");
+      } finally {
+        setIsPending(false);
       }
     };
 

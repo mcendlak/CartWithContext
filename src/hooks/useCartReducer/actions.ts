@@ -1,29 +1,58 @@
-import { IItemData, Istate } from "../../types";
-
+import { IState, IChosenProduct } from "./typesReducer";
 import Helpers from "./Helpers";
 
 class Actions {
-  addProduct = (state: Istate, payload: IItemData) => {
-    const productIndex = Helpers.findProductIndex(state, payload.id);
+  addProduct = (state: IState, payload: IChosenProduct) => {
+    const productIndex = Helpers.findProductIndex(state.items, payload.id);
 
-    if (productIndex) {
+    if (productIndex >= 0) {
+      const newItems = Helpers.updateArrayWithIncrementedQuantity(
+        state.items,
+        productIndex
+      );
       return {
         ...state,
-        items: Helpers.updateArrayWithInrementedQuantity(state, productIndex),
+        items: newItems,
+        totalAmount: Helpers.calculateCartValue(newItems),
       };
     } else {
-      return { ...state, items: [...state.items, payload] };
+      const newItem = { ...payload, quantity: 1 };
+      const newItems = [...state.items, newItem];
+      return {
+        ...state,
+        items: newItems,
+        totalAmount: Helpers.calculateCartValue(newItems),
+      };
     }
   };
-  removeProduct = (state: Istate, payload: string) => {
-    return state;
-  };
-  removeAllProducts = (state: Istate) => {
-    return state;
-  };
 
-  submitCart = (state: Istate) => {
-    return state;
+  removeProduct = (state: IState, payload: string) => {
+    const productIndex = Helpers.findProductIndex(state.items, payload);
+
+    if (state.items[productIndex].quantity > 1) {
+      const newItems = Helpers.updateArrayWithDecrementedQuantity(
+        state.items,
+        productIndex
+      );
+      return {
+        ...state,
+        items: newItems,
+        totalAmount: Helpers.calculateCartValue(newItems),
+      };
+    } else {
+      const newItems = state.items.filter((item, index) => {
+        return item.id !== payload;
+      });
+      return {
+        ...state,
+        items: newItems,
+        totalAmount: Helpers.calculateCartValue(newItems),
+      };
+    }
+  };
+  removeAllProducts = (state: IState) => {
+    const emptyItemsArray: IChosenProduct[] = [];
+    return { ...state, items: emptyItemsArray, totalAmount: 0 };
   };
 }
 

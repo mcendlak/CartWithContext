@@ -1,3 +1,13 @@
-.item {
-  background-color: blueviolet;
+.chosen-item {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 0;
+}
+
+.chosen-item * {
+  margin: 0 0 1rem 0;
+  /* margin-bottom: 1rem; */
 }

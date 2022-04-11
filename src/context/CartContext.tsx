@@ -1,31 +1,33 @@
-// hooks
 import { createContext } from "react";
+
+// hooks
 import useCartReducer from "../hooks/useCartReducer";
 
 // types
-import { IContext } from "../types";
+import { IContext } from "./types";
 
-const initialContext: IContext = {} as IContext;
-// const initialContext= {};
-const CartContext = createContext(initialContext);
+const CartContext = createContext({} as IContext);
 
-export const CartContextProvider: React.FC = (props) => {
-  const { addProduct, removeProduct, removeAllProducts, submitCart, state } =
-    useCartReducer();
+export const CartContextProvider: React.FC = ({ children }) => {
+  const {
+    addProduct,
+    removeProduct,
+    removeAllProducts,
+    isProductAvailable,
+    state,
+  } = useCartReducer();
 
-  // opakować to w useMemo?
-  // funkcje z useReducer są traktowane jako niezmienne, tak samo jak te z useState?
   const providedContext = {
     addProduct,
     removeProduct,
     removeAllProducts,
-    submitCart,
+    isProductAvailable,
     state,
   };
 
   return (
     <CartContext.Provider value={providedContext}>
-      {props.children}
+      {children}
     </CartContext.Provider>
   );
 };

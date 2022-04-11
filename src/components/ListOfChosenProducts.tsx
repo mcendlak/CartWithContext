@@ -1,20 +1,21 @@
-// hooks
-import { useContext } from 'react';
-
 // styles
-import './ListOfChosenProducts.css'
+import "./ListOfChosenProducts.css";
 
 // context
-import CartContext from '../context/CartContext';
-import ChosenProduct from './ChosenProduct';
+import useCartContext from "../hooks/useCartContext";
+
+// components
+import ChosenProduct from "./ChosenProduct";
 
 const ListOfChosenProducts = () => {
-  const ctx = useContext(CartContext)
+  const { state, removeAllProducts } = useCartContext();
 
   return (
-    <div className='chosen-products'>
-      <h2>Your basket</h2>
-      {ctx.state.items.map(item => (
+    <div className="chosen-products">
+      <h2>Your products</h2>
+      <p>Total: {state.totalAmount.toFixed(2)} PLN</p>
+      <button onClick={removeAllProducts}>Remove all products</button>
+      {state.items.map((item) => (
         <ChosenProduct item={item} key={item.id} />
       ))}
     </div>

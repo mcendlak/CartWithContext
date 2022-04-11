@@ -1,31 +1,49 @@
+// hooks
 import { useReducer } from "react";
-import { IItemData } from "../../types";
 
-import { cartReducer } from "./reducer";
+// types
+import { IItemData } from "../../context/types";
 
-const initialState: { items: IItemData[] } = { items: [] };
+// reducer modules
+import { cartReducer } from "./cartReducer";
+import initialState from "./state";
+import Helpers from "./Helpers";
 
 const useCartReducer = () => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addProduct = (product: IItemData) => {
-    console.log(state)
     dispatch({ type: "addProduct", payload: product });
   };
 
   const removeProduct = (productId: string) => {
-    dispatch({type: 'removeProduct', payload: productId})
+    dispatch({ type: "removeProduct", payload: productId });
   };
 
   const removeAllProducts = () => {
-    dispatch({type: 'removeAllProducts'})
+    dispatch({ type: "removeAllProducts" });
   };
 
-  const submitCart = () => {
-    dispatch({type: 'submitCart'})
+  const isProductAvailable = (product: IItemData) => {
+    const chosenProductIndex = Helpers.findProductIndex(
+      state.items,
+      product.id
+    );
+    if (chosenProductIndex === -1 && product.quantity > 0) return true;
+    const chosenQuantity = state.items[chosenProductIndex].quantity;
+
+    const isProductAvailable = product.quantity > chosenQuantity;
+
+    return isProductAvailable;
   };
 
-  return { addProduct, removeProduct, removeAllProducts, submitCart, state };
+  return {
+    addProduct,
+    removeProduct,
+    removeAllProducts,
+    isProductAvailable,
+    state,
+  };
 };
 
 export default useCartReducer;

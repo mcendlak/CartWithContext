@@ -1,16 +1,17 @@
 // styles
 import "./Cart.css";
+
 // components
 import ListOfAvailableProducts from "./ListOfAvailableProducts";
-import ChosenProducts from "./ListOfChosenProducts";
+import ListOfChosenProducts from "./ListOfChosenProducts";
 
 const Cart = () => {
   return (
-    <div>
+    <div className="cart">
       <h1>Choose your products</h1>
       <div className="cart-container">
         <ListOfAvailableProducts />
-        <ChosenProducts />
+        <ListOfChosenProducts />
       </div>
     </div>
   );

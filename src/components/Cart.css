@@ -1,7 +1,11 @@
-.cart-container {
-  background-color: gray;
+.cart {
+  background-color: rgb(214, 214, 214);
   width: 80%;
   margin: 0 auto;
+}
+
+.cart-container {
+
   display: flex;
   justify-content: flex-start;
 }
