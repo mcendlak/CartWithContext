@@ -9,21 +9,7 @@ import { IContext } from "./types";
 const CartContext = createContext({} as IContext);
 
 export const CartContextProvider: React.FC = ({ children }) => {
-  const {
-    addProduct,
-    removeProduct,
-    removeAllProducts,
-    isProductAvailable,
-    state,
-  } = useCartReducer();
-
-  const providedContext = {
-    addProduct,
-    removeProduct,
-    removeAllProducts,
-    isProductAvailable,
-    state,
-  };
+  const providedContext = useCartReducer();
 
   return (
     <CartContext.Provider value={providedContext}>
